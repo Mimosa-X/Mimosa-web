@@ -36,7 +36,7 @@
                 v-for="(btn, btnIndex) in platform.buttons" 
                 :key="btnIndex"
                 :type="btn.type"
-                :size="btn.size || 'default'"
+                :size="(btn as any).size || 'default'"
                 round
                 @click="handleDownload(btn.url, platform.name)"
               >
