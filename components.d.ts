@@ -8,6 +8,7 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     AppFooter: typeof import('./src/components/layout/AppFooter.vue')['default']
+    BorderGlow: typeof import('./src/components/effects/BorderGlow.vue')['default']
     DownloadSection: typeof import('./src/components/sections/DownloadSection.vue')['default']
     ElButton: typeof import('element-plus/es')['ElButton']
     ElCollapse: typeof import('element-plus/es')['ElCollapse']

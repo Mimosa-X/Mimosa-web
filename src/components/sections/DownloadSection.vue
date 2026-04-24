@@ -12,13 +12,21 @@
 
       <!-- Download Platforms Grid -->
       <div class="platforms-grid">
-        <!-- Android -->
-        <div 
+        <!-- Platform Cards with Border Glow -->
+        <BorderGlow
           v-for="(platform, index) in platforms"
           :key="index"
-          class="platform-card" 
-          :class="{ 'featured': platform.featured }"
+          :className="'platform-card-wrapper'"
+          :borderRadius="20"
+          :backgroundColor="'white'"
+          :glowRadius="30"
+          :glowIntensity="1.2"
+          :colors="[platform.borderColor, platform.glowColor || platform.borderColor, '#ffffff']"
+          :glowColor="platform.glowColor || '160 100 60'"
+          :edgeSensitivity="25"
+          :coneSpread="20"
         >
+          <div class="platform-card" :class="{ 'featured': platform.featured }">
             <div class="platform-icon" :style="{ background: platform.gradient }">
               <el-icon :size="36"><component :is="platform.icon" /></el-icon>
             </div>
@@ -57,7 +65,8 @@
                 <span class="stat-label">评分</span>
               </div>
             </div>
-        </div>
+          </div>
+        </BorderGlow>
       </div>
     </div>
   </section>
@@ -73,6 +82,7 @@ import {
   Lock
 } from '@element-plus/icons-vue'
 import { ElMessage } from 'element-plus'
+import BorderGlow from '../effects/BorderGlow.vue'
 
 const platforms = [
   {
@@ -82,6 +92,7 @@ const platforms = [
     size: '85 MB',
     gradient: 'linear-gradient(135deg, #3DDC84 0%, #00A86B 100%)',
     borderColor: '#3DDC84',
+    glowColor: '140 80 50',
     featured: true,
     buttons: [
       { label: '下载 APK', type: 'success', url: '#' }
@@ -99,6 +110,7 @@ const platforms = [
     size: '92 MB',
     gradient: 'linear-gradient(135deg, #007AFF 0%, #5856D6 100%)',
     borderColor: '#007AFF',
+    glowColor: '210 100 60',
     buttons: [
       { label: 'App Store', type: 'primary', url: '#' }
     ],
@@ -115,6 +127,7 @@ const platforms = [
     size: '120 MB',
     gradient: 'linear-gradient(135deg, #0078D4 0%, #00BCF2 100%)',
     borderColor: '#0078D4',
+    glowColor: '200 100 55',
     buttons: [
       { label: '下载 .exe', type: 'primary', url: '#' }
     ],
@@ -131,6 +144,7 @@ const platforms = [
     size: '135 MB',
     gradient: 'linear-gradient(135deg, #555555 0%, #333333 100%)',
     borderColor: '#999999',
+    glowColor: '0 0 70',
     buttons: [
       { label: '下载 .dmg', type: 'primary', url: '#' }
     ],
@@ -147,6 +161,7 @@ const platforms = [
     size: '110 MB',
     gradient: 'linear-gradient(135deg, #FF6B35 0%, #F7931E 100%)',
     borderColor: '#FF6B35',
+    glowColor: '25 100 60',
     buttons: [
       { label: '.deb 包', type: 'warning', url: '#' }
     ],
@@ -206,41 +221,19 @@ const handleDownload = (url: string, platformName: string) => {
   margin-bottom: 80px;
 }
 
-.platform-card-electric {
-  display: flex;
+.platform-card-wrapper {
   width: 100%;
-  height: 100%;
 }
 
 .platform-card {
   background: white;
   padding: 32px 28px;
-  border-radius: var(--border-radius-lg);
-  box-shadow: var(--shadow-sm);
-  transition: all var(--transition-normal);
+  border-radius: 20px;
   position: relative;
   overflow: hidden;
   width: 100%;
-}
-
-.platform-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 4px;
-  background: transparent;
-  transition: all var(--transition-normal);
-}
-
-.platform-card:hover {
-  transform: translateY(-8px);
-  box-shadow: var(--shadow-lg);
-}
-
-.platform-card:hover::before {
-  background: var(--gradient-primary);
+  /* 移除原有阴影效果 */
+  box-shadow: none;
 }
 
 .platform-card.featured {
@@ -269,11 +262,6 @@ const handleDownload = (url: string, platformName: string) => {
   justify-content: center;
   color: white;
   margin-bottom: 20px;
-  transition: transform var(--transition-normal);
-}
-
-.platform-card:hover .platform-icon {
-  transform: scale(1.1) rotate(-5deg);
 }
 
 .web-icon {
@@ -357,237 +345,16 @@ const handleDownload = (url: string, platformName: string) => {
   margin-top: 2px;
 }
 
-/* Web Card Special Styles */
-.web-card {
-  grid-column: span 2;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 28px;
-  align-items: start;
-}
-
-.web-preview {
-  position: relative;
-}
-
-.browser-mockup {
-  background: white;
-  border-radius: var(--border-radius-md);
-  overflow: hidden;
-  box-shadow: var(--shadow-md);
-  border: 1px solid #e0e0e0;
-}
-
-.browser-bar {
-  background: #f8f9fa;
-  padding: 12px 16px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  border-bottom: 1px solid #e0e0e0;
-}
-
-.browser-dots {
-  display: flex;
-  gap: 6px;
-}
-
-.browser-dots span {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-}
-
-.browser-dots span:nth-child(1) { background: #ff5f57; }
-.browser-dots span:nth-child(2) { background: #ffbd2e; }
-.browser-dots span:nth-child(3) { background: #28ca42; }
-
-.browser-url {
-  flex: 1;
-  background: white;
-  padding: 6px 12px;
-  border-radius: 6px;
-  font-size: 13px;
-  color: var(--text-secondary);
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.browser-content {
-  padding: 20px;
-  background: linear-gradient(180deg, #fff5f7 0%, #ffffff 100%);
-  min-height: 140px;
-}
-
-.mini-chat {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.mini-message {
-  max-width: 70%;
-  padding: 10px 14px;
-  border-radius: 14px;
-  font-size: 13px;
-  line-height: 1.4;
-}
-
-.mini-message.received {
-  background: white;
-  color: var(--text-primary);
-  align-self: flex-start;
-  box-shadow: var(--shadow-sm);
-}
-
-.mini-message.sent {
-  background: var(--gradient-primary);
-  color: white;
-  align-self: flex-end;
-}
-
-/* QR Code Section */
-.qr-section {
-  background: white;
-  padding: 48px;
-  border-radius: var(--border-radius-lg);
-  box-shadow: var(--shadow-md);
-  margin-bottom: 60px;
-}
-
-.qr-content {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 48px;
-}
-
-.qr-code {
-  width: 180px;
-  height: 180px;
-  background: var(--bg-gray);
-  border-radius: var(--border-radius-md);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-
-.qr-placeholder {
-  text-align: center;
-  color: var(--text-secondary);
-}
-
-.qr-placeholder p {
-  margin-top: 8px;
-  font-size: 14px;
-  font-weight: 500;
-}
-
-.qr-info h3 {
-  font-size: 26px;
-  font-weight: 700;
-  color: var(--text-primary);
-  margin-bottom: 12px;
-}
-
-.qr-info p {
-  font-size: 15px;
-  color: var(--text-secondary);
-  line-height: 1.6;
-  margin-bottom: 8px;
-}
-
-.qr-tip {
-  color: var(--primary-color) !important;
-  font-weight: 500 !important;
-}
-
-/* Requirements */
-.requirements {
-  text-align: center;
-}
-
-.requirements-title {
-  font-size: 28px;
-  font-weight: 700;
-  color: var(--text-primary);
-  margin-bottom: 32px;
-}
-
-.requirements-grid {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 24px;
-}
-
-.requirement-item {
-  background: white;
-  padding: 24px 20px;
-  border-radius: var(--border-radius-md);
-  box-shadow: var(--shadow-sm);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 12px;
-  transition: all var(--transition-normal);
-}
-
-.requirement-item:hover {
-  transform: translateY(-5px);
-  box-shadow: var(--shadow-md);
-}
-
-.requirement-item .el-icon {
-  font-size: 36px;
-  color: var(--primary-color);
-}
-
-.requirement-item strong {
-  font-size: 16px;
-  color: var(--text-primary);
-  display: block;
-  margin-bottom: 4px;
-}
-
-.requirement-item p {
-  font-size: 13px;
-  color: var(--text-secondary);
-}
-
 /* Responsive Design */
 @media (max-width: 1199px) {
   .section-title {
     font-size: 36px;
-  }
-
-  .web-card {
-    grid-column: span 1;
-    grid-template-columns: 1fr;
-  }
-
-  .web-preview {
-    order: -1;
-  }
-
-  .requirements-grid {
-    grid-template-columns: repeat(3, 1fr);
   }
 }
 
 @media (max-width: 991px) {
   .platforms-grid {
     grid-template-columns: repeat(2, 1fr);
-  }
-
-  .requirements-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .qr-content {
-    flex-direction: column;
-    text-align: center;
   }
 }
 
@@ -601,19 +368,6 @@ const handleDownload = (url: string, platformName: string) => {
   }
 
   .platforms-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .qr-section {
-    padding: 32px 20px;
-  }
-
-  .qr-code {
-    width: 150px;
-    height: 150px;
-  }
-
-  .requirements-grid {
     grid-template-columns: 1fr;
   }
 
