@@ -95,7 +95,7 @@ const platforms = [
     glowColor: '140 80 50',
     featured: true,
     buttons: [
-      { label: '下载 APK', type: 'success', url: '#' }
+      { label: '下载 APK', type: 'success', url: 'https://1826995752.share.123pan.cn/123pan/Y3Lrjv-vYGmh' }
     ],
     features: ['APK 直装', '自动更新', '深色模式', '通知管理'],
     stats: {
@@ -129,7 +129,7 @@ const platforms = [
     borderColor: '#0078D4',
     glowColor: '200 100 55',
     buttons: [
-      { label: '下载 .exe', type: 'primary', url: '#' }
+      { label: '下载 .exe', type: 'primary', url: 'https://1826995752.share.123pan.cn/123pan/Y3Lrjv-dYGmh' }
     ],
     features: ['原生应用', '系统通知', '快捷键支持', '多窗口'],
     stats: {
@@ -175,7 +175,8 @@ const platforms = [
 
 const handleDownload = (url: string, platformName: string) => {
   ElMessage.success(`正在准备 ${platformName} 下载...`)
-  // 实际项目中这里会触发真实的下载逻辑
+  // 跳转到实际下载链接
+  window.open(url, '_blank')
 }
 </script>
 
