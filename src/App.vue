@@ -1,6 +1,24 @@
 <template>
   <div id="mimosa-app">
-    <!-- 流体光标效果 -->
+    <!-- Ribbons 丝带效果背景层 -->
+    <div class="ribbons-layer">
+      <Ribbons
+        :colors="['#3DDC84']"
+        :base-spring="0.03"
+        :base-friction="0.9"
+        :base-thickness="35"
+        :offset-factor="0"
+        :max-age="500"
+        :point-count="60"
+        :speed-multiplier="0.6"
+        :enable-fade="true"
+        :enable-shader-effect="false"
+        :effect-amplitude="2"
+        :background-color="[0, 0, 0, 0]"
+      />
+    </div>
+    
+    <!-- 流体光标效果层 -->
     <SplashCursor
       :SIM_RESOLUTION="128"
       :DYE_RESOLUTION="1440"
@@ -17,6 +35,8 @@
       :BACK_COLOR="{ r: 0, g: 0.5, b: 0.3 }"
       :TRANSPARENT="true"
     />
+    
+    <!-- 导航栏和内容层 -->
     <FloatingNavBar />
     <main class="main-content">
       <router-view v-slot="{ Component }">
@@ -33,6 +53,7 @@
 import FloatingNavBar from './components/layout/FloatingNavBar.vue'
 import AppFooter from './components/layout/AppFooter.vue'
 import SplashCursor from './components/effects/SplashCursor.vue'
+import Ribbons from './components/effects/Ribbons.vue'
 </script>
 
 <style scoped>
@@ -40,10 +61,25 @@ import SplashCursor from './components/effects/SplashCursor.vue'
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
+/* Ribbons 背景层 - 最底层 */
+.ribbons-layer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+  pointer-events: none;
+}
+
+/* 内容层 - 在效果之上 */
 .main-content {
   flex: 1;
+  position: relative;
+  z-index: 10;
 }
 
 .fade-enter-active,

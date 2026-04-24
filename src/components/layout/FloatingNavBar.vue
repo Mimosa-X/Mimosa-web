@@ -63,7 +63,7 @@
       <div v-if="isMobileMenuOpen" class="mobile-menu-panel">
         <GlassSurface
           width="100%"
-          :height="mobileMenuHeight"
+          :height="0"
           :border-radius="24"
           :border-width="0.03"
           :brightness="90"
@@ -130,11 +130,6 @@ const navWidth = computed(() => {
   if (width < 640) return 'calc(100% - 32px)'
   if (width < 1024) return '600px'
   return '720px'
-})
-
-const mobileMenuHeight = computed(() => {
-  // 根据导航项数量计算菜单高度
-  return 180 + navItems.length * 60
 })
 
 // 滚动处理
@@ -315,7 +310,7 @@ onUnmounted(() => {
 /* 移动端菜单面板 */
 .mobile-menu-panel {
   position: fixed;
-  bottom: 20px;
+  bottom: -355px;
   left: 50%;
   transform: translateX(-50%);
   width: calc(100% - 32px);
@@ -327,11 +322,14 @@ onUnmounted(() => {
   box-shadow:
     0 20px 25px -5px rgba(0, 0, 0, 0.1),
     0 10px 10px -5px rgba(0, 0, 0, 0.04) !important;
+  min-height: auto !important;
+  height: auto !important;
 }
 
 .mobile-menu-content {
   width: 100%;
   padding: 20px;
+  min-height: 200px;
 }
 
 .mobile-menu-header {
