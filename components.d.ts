@@ -29,6 +29,5 @@ declare module 'vue' {
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     SplashCursor: typeof import('./src/components/effects/SplashCursor.vue')['default']
-    VariableProximity: typeof import('./src/components/effects/VariableProximity.vue')['default']
   }
 }

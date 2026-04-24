@@ -13,17 +13,12 @@
       <!-- Download Platforms Grid -->
       <div class="platforms-grid">
         <!-- Android -->
-        <ElectricBorder
+        <div 
           v-for="(platform, index) in platforms"
           :key="index"
-          :color="platform.borderColor"
-          :speed="1.5"
-          :chaos="0.8"
-          :thickness="2"
-          :style="{ borderRadius: '20px' }"
-          class="platform-card-electric"
+          class="platform-card" 
+          :class="{ 'featured': platform.featured }"
         >
-          <div class="platform-card" :class="{ 'featured': platform.featured }">
             <div class="platform-icon" :style="{ background: platform.gradient }">
               <el-icon :size="36"><component :is="platform.icon" /></el-icon>
             </div>
@@ -62,8 +57,7 @@
                 <span class="stat-label">评分</span>
               </div>
             </div>
-          </div>
-        </ElectricBorder>
+        </div>
       </div>
     </div>
   </section>
@@ -79,7 +73,6 @@ import {
   Lock
 } from '@element-plus/icons-vue'
 import { ElMessage } from 'element-plus'
-import ElectricBorder from '../effects/ElectricBorder.vue'
 
 const platforms = [
   {
