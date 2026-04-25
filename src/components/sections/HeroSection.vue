@@ -59,24 +59,7 @@
 
       <div class="hero-visual">
         <div class="phone-mockup">
-          <div class="phone-screen">
-            <div class="screen-content">
-              <div class="chat-preview">
-                <div class="message message-received">
-                  <div class="message-avatar">👤</div>
-                  <div class="message-bubble">嗨！欢迎使用 Mimosa 🎉</div>
-                </div>
-                <div class="message message-sent">
-                  <div class="message-bubble">太棒了！看起来很酷 😊</div>
-                </div>
-                <div class="message message-received">
-                  <div class="message-avatar">👤</div>
-                  <div class="message-bubble">快来探索更多功能吧！</div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="phone-notch"></div>
+          <img src="/mimosa.png" alt="Mimosa App" class="phone-screenshot" />
         </div>
 
         <div class="floating-card card-1">
@@ -336,13 +319,18 @@ import { Star, Download, VideoPlay, User, ChatDotRound } from '@element-plus/ico
 .phone-mockup {
   width: 280px;
   height: 560px;
-  background: linear-gradient(145deg, #ffffff, #f5f5f5);
   border-radius: 40px;
-  padding: 12px;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15),
-              inset 0 2px 4px rgba(255, 255, 255, 0.8);
+  padding: 17px;
   position: relative;
   animation: phoneFloat 4s ease-in-out infinite;
+  overflow: hidden;
+}
+
+.phone-screenshot {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 32px;
 }
 
 @keyframes phoneFloat {
