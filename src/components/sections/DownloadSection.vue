@@ -182,7 +182,7 @@ const handleDownload = (url: string, platformName: string) => {
 
 <style scoped>
 .download-section {
-  background: linear-gradient(180deg, var(--bg-gray) 0%, white 100%);
+  background: linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
 }
 
 .section-header {
@@ -227,7 +227,7 @@ const handleDownload = (url: string, platformName: string) => {
 }
 
 .platform-card {
-  background: white;
+  background: var(--bg-card);
   padding: 32px 28px;
   border-radius: 20px;
   position: relative;
@@ -326,7 +326,7 @@ const handleDownload = (url: string, platformName: string) => {
   display: flex;
   gap: 24px;
   padding-top: 20px;
-  border-top: 1px solid #f0f0f0;
+  border-top: 1px solid var(--border-color);
 }
 
 .stat {

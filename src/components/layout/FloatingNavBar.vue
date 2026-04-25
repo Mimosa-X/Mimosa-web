@@ -33,6 +33,25 @@
           >
             {{ item.label }}
           </router-link>
+          
+          <!-- Theme Toggle Button -->
+          <button 
+            class="theme-toggle-btn"
+            @click="handleThemeToggle"
+            :aria-label="isDark ? '切换到浅色模式' : '切换到深色模式'"
+            :title="isDark ? '切换到浅色模式' : '切换到深色模式'"
+          >
+            <div class="theme-toggle-track">
+              <div class="theme-toggle-thumb" :class="{ 'dark': isDark }">
+                <el-icon class="theme-icon sun">
+                  <Sunny />
+                </el-icon>
+                <el-icon class="theme-icon moon">
+                  <Moon />
+                </el-icon>
+              </div>
+            </div>
+          </button>
         </div>
 
         <!-- Mobile Menu Toggle -->
@@ -93,6 +112,27 @@
                 <el-icon><ArrowRight /></el-icon>
               </router-link>
             </nav>
+            
+            <!-- Mobile Theme Toggle -->
+            <div class="mobile-theme-toggle">
+              <span class="theme-label">主题模式</span>
+              <button 
+                class="theme-toggle-btn mobile"
+                @click="handleThemeToggle"
+                :aria-label="isDark ? '切换到浅色模式' : '切换到深色模式'"
+              >
+                <div class="theme-toggle-track">
+                  <div class="theme-toggle-thumb" :class="{ 'dark': isDark }">
+                    <el-icon class="theme-icon sun">
+                      <Sunny />
+                    </el-icon>
+                    <el-icon class="theme-icon moon">
+                      <Moon />
+                    </el-icon>
+                  </div>
+                </div>
+              </button>
+            </div>
           </div>
         </GlassSurface>
       </div>
@@ -103,10 +143,12 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useRoute } from 'vue-router'
-import { Close, ArrowRight } from '@element-plus/icons-vue'
+import { Close, ArrowRight, Sunny, Moon } from '@element-plus/icons-vue'
 import GlassSurface from '../effects/GlassSurface.vue'
+import { useTheme } from '../../composables/useTheme'
 
 const route = useRoute()
+const { isDark, toggleTheme } = useTheme()
 
 // 响应式状态
 const isScrolled = ref(false)
@@ -152,6 +194,17 @@ const toggleMobileMenu = () => {
 const closeMobileMenu = () => {
   isMobileMenuOpen.value = false
   document.body.style.overflow = ''
+}
+
+// 主题切换处理
+const handleThemeToggle = () => {
+  // 添加过渡类
+  document.documentElement.classList.add('theme-transition')
+  toggleTheme()
+  // 移除过渡类
+  setTimeout(() => {
+    document.documentElement.classList.remove('theme-transition')
+  }, 400)
 }
 
 // 生命周期钩子
@@ -267,6 +320,81 @@ onUnmounted(() => {
   font-weight: 600;
 }
 
+/* 主题切换按钮 */
+.theme-toggle-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  margin-left: 8px;
+  border-radius: 20px;
+  transition: all 0.3s ease;
+}
+
+.theme-toggle-btn:hover {
+  background: rgba(0, 176, 133, 0.08);
+}
+
+.theme-toggle-btn:active {
+  transform: scale(0.95);
+}
+
+.theme-toggle-track {
+  width: 56px;
+  height: 28px;
+  background: var(--bg-tertiary);
+  border-radius: 14px;
+  padding: 2px;
+  transition: background 0.3s ease;
+  border: 1px solid var(--border-color);
+}
+
+.theme-toggle-thumb {
+  width: 24px;
+  height: 24px;
+  background: var(--gradient-primary);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.theme-toggle-thumb.dark {
+  transform: translateX(28px);
+}
+
+.theme-icon {
+  font-size: 14px;
+  color: white;
+  position: absolute;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.theme-icon.sun {
+  opacity: 1;
+  transform: rotate(0deg);
+}
+
+.theme-icon.moon {
+  opacity: 0;
+  transform: rotate(-90deg);
+}
+
+.theme-toggle-thumb.dark .theme-icon.sun {
+  opacity: 0;
+  transform: rotate(90deg);
+}
+
+.theme-toggle-thumb.dark .theme-icon.moon {
+  opacity: 1;
+  transform: rotate(0deg);
+}
+
 /* 汉堡菜单按钮 */
 .mobile-toggle {
   display: none;
@@ -338,7 +466,7 @@ onUnmounted(() => {
   align-items: center;
   margin-bottom: 16px;
   padding-bottom: 16px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  border-bottom: 1px solid var(--border-color);
 }
 
 .menu-title {
@@ -353,7 +481,7 @@ onUnmounted(() => {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(0, 0, 0, 0.05);
+  background: var(--bg-tertiary);
   border: none;
   border-radius: 8px;
   cursor: pointer;
@@ -362,7 +490,7 @@ onUnmounted(() => {
 }
 
 .close-btn:hover {
-  background: rgba(0, 0, 0, 0.1);
+  background: var(--bg-secondary);
   color: var(--text-primary);
 }
 
@@ -406,6 +534,26 @@ onUnmounted(() => {
 .mobile-nav-link:hover .el-icon {
   transform: translateX(4px);
   color: var(--primary-color);
+}
+
+/* 移动端主题切换 */
+.mobile-theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+  margin-top: 16px;
+  border-top: 1px solid var(--border-color);
+}
+
+.theme-label {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.theme-toggle-btn.mobile {
+  margin-left: 0;
 }
 
 /* 过渡动画 */

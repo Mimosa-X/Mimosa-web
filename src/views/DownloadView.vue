@@ -165,6 +165,12 @@ const guides = [
   background: linear-gradient(135deg, #fff5f7 0%, #f0f4ff 100%);
   padding: 120px 0 60px;
   text-align: center;
+  transition: background var(--transition-theme);
+}
+
+:root.dark .page-header,
+[data-theme="dark"] .page-header {
+  background: linear-gradient(135deg, #0a0a0f 0%, #12121a 100%);
 }
 
 .page-header h1 {
@@ -206,7 +212,7 @@ const guides = [
   top: 0;
   bottom: 0;
   width: 2px;
-  background: #e0e0e0;
+  background: var(--border-color);
 }
 
 .timeline-item {
@@ -222,12 +228,12 @@ const guides = [
   height: 16px;
   border-radius: 50%;
   background: var(--gradient-primary);
-  border: 3px solid white;
+  border: 3px solid var(--bg-card);
   box-shadow: var(--shadow-sm);
 }
 
 .timeline-content {
-  background: white;
+  background: var(--bg-card);
   padding: 28px 32px;
   border-radius: var(--border-radius-md);
   box-shadow: var(--shadow-sm);
@@ -305,7 +311,7 @@ const guides = [
 
 /* Installation Guide */
 .install-guide {
-  background-color: white;
+  background-color: var(--bg-card);
 }
 
 .guide-title {

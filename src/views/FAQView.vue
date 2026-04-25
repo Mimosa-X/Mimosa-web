@@ -255,6 +255,12 @@ const submitFeedback = async () => {
   background: linear-gradient(135deg, #fff5f7 0%, #f0f4ff 100%);
   padding: 120px 0 60px;
   text-align: center;
+  transition: background var(--transition-theme);
+}
+
+:root.dark .page-header,
+[data-theme="dark"] .page-header {
+  background: linear-gradient(135deg, #0a0a0f 0%, #12121a 100%);
 }
 
 .page-header h1 {
@@ -305,7 +311,7 @@ const submitFeedback = async () => {
 }
 
 .category-card {
-  background: white;
+  background: var(--bg-card);
   padding: 28px 20px;
   border-radius: var(--border-radius-md);
   text-align: center;
@@ -345,7 +351,7 @@ const submitFeedback = async () => {
 
 /* Contact Options */
 .contact-options {
-  background-color: white;
+  background-color: var(--bg-card);
 }
 
 .options-title {
@@ -422,7 +428,7 @@ const submitFeedback = async () => {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 60px;
-  background: white;
+  background: var(--bg-card);
   padding: 60px;
   border-radius: var(--border-radius-lg);
   box-shadow: var(--shadow-md);

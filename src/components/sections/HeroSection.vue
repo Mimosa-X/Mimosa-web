@@ -109,6 +109,13 @@ import { Star, Download, VideoPlay, User, ChatDotRound } from '@element-plus/ico
   bottom: 0;
   background: linear-gradient(135deg, #fff5f7 0%, #f0f4ff 50%, #fff9e6 100%);
   z-index: -1;
+  transition: background var(--transition-theme);
+}
+
+/* 深色主题背景 */
+:root.dark .hero-background,
+[data-theme="dark"] .hero-background {
+  background: linear-gradient(135deg, #0a0a0f 0%, #12121a 50%, #0f0f18 100%);
 }
 
 .gradient-overlay {
@@ -266,9 +273,9 @@ import { Star, Download, VideoPlay, User, ChatDotRound } from '@element-plus/ico
 }
 
 .btn-secondary {
-  background: white;
+  background: var(--bg-card);
   color: var(--text-primary);
-  border: 2px solid #e0e0e0;
+  border: 2px solid var(--border-color);
 }
 
 .btn-secondary:hover {
@@ -304,7 +311,7 @@ import { Star, Download, VideoPlay, User, ChatDotRound } from '@element-plus/ico
 .stat-divider {
   width: 1px;
   height: 40px;
-  background-color: #e0e0e0;
+  background-color: var(--border-color);
 }
 
 /* Hero Visual */
@@ -419,7 +426,7 @@ import { Star, Download, VideoPlay, User, ChatDotRound } from '@element-plus/ico
 
 .floating-card {
   position: absolute;
-  background: white;
+  background: var(--bg-card);
   padding: 12px 20px;
   border-radius: 16px;
   box-shadow: var(--shadow-lg);

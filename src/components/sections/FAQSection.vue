@@ -216,8 +216,8 @@ const filteredFaqs = computed(() => {
 
 .category-btn {
   padding: 10px 24px;
-  background: white;
-  border: 2px solid transparent;
+  background: var(--bg-card);
+  border: 2px solid var(--border-color);
   border-radius: 25px;
   font-size: 15px;
   font-weight: 500;
@@ -241,7 +241,7 @@ const filteredFaqs = computed(() => {
 .faq-list {
   max-width: 800px;
   margin: 0 auto 60px;
-  background: white;
+  background: var(--bg-card);
   border-radius: var(--border-radius-lg);
   box-shadow: var(--shadow-md);
   overflow: hidden;
@@ -286,7 +286,7 @@ const filteredFaqs = computed(() => {
 
 /* Support CTA */
 .support-cta {
-  background: white;
+  background: var(--bg-card);
   padding: 48px;
   border-radius: var(--border-radius-lg);
   text-align: center;
@@ -334,7 +334,7 @@ const filteredFaqs = computed(() => {
 }
 
 .quick-link-card {
-  background: white;
+  background: var(--bg-card);
   padding: 32px 24px;
   border-radius: var(--border-radius-md);
   text-align: center;

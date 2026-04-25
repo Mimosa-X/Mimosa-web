@@ -209,7 +209,7 @@ const features = [
 }
 
 .feature-card {
-  background: white;
+  background: var(--bg-card);
   padding: 36px 28px;
   border-radius: var(--border-radius-lg);
   box-shadow: var(--shadow-sm);
@@ -278,7 +278,7 @@ const features = [
   grid-template-columns: 1fr 1fr;
   gap: 60px;
   align-items: center;
-  background: white;
+  background: var(--bg-card);
   padding: 60px;
   border-radius: var(--border-radius-lg);
   box-shadow: var(--shadow-md);
@@ -362,19 +362,19 @@ const features = [
 }
 
 .ai-demo {
-  background: #f8f9fa;
+  background: var(--bg-tertiary);
   border-radius: var(--border-radius-md);
   overflow: hidden;
   box-shadow: var(--shadow-lg);
 }
 
 .demo-header {
-  background: white;
+  background: var(--bg-card);
   padding: 16px 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid var(--border-color);
 }
 
 .demo-dots {
@@ -409,7 +409,7 @@ const features = [
   display: flex;
   align-items: center;
   gap: 12px;
-  background: white;
+  background: var(--bg-card);
   padding: 16px;
   border-radius: var(--border-radius-sm);
   transition: all var(--transition-fast);

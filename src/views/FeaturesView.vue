@@ -146,6 +146,12 @@ const comparisonData = [
   background: linear-gradient(135deg, #fff5f7 0%, #f0f4ff 100%);
   padding: 120px 0 60px;
   text-align: center;
+  transition: background var(--transition-theme);
+}
+
+:root.dark .page-header,
+[data-theme="dark"] .page-header {
+  background: linear-gradient(135deg, #0a0a0f 0%, #12121a 100%);
 }
 
 .page-header h1 {
@@ -174,7 +180,7 @@ const comparisonData = [
   display: grid;
   grid-template-columns: auto 1fr 200px;
   gap: 32px;
-  background: white;
+  background: var(--bg-card);
   padding: 40px;
   border-radius: var(--border-radius-lg);
   box-shadow: var(--shadow-sm);
@@ -250,7 +256,7 @@ const comparisonData = [
 
 /* Comparison Section */
 .comparison-section {
-  background-color: white;
+  background-color: var(--bg-card);
 }
 
 .comparison-title {
@@ -270,18 +276,18 @@ const comparisonData = [
 .comparison-table {
   width: 100%;
   border-collapse: collapse;
-  background: white;
+  background: var(--bg-card);
 }
 
 .comparison-table th,
 .comparison-table td {
   padding: 18px 24px;
   text-align: left;
-  border-bottom: 1px solid #f0f0f0;
+  border-bottom: 1px solid var(--border-color);
 }
 
 .comparison-table th {
-  background: var(--bg-gray);
+  background: var(--bg-tertiary);
   font-weight: 600;
   color: var(--text-primary);
   font-size: 15px;
@@ -293,7 +299,7 @@ const comparisonData = [
 }
 
 .comparison-table tr:hover {
-  background-color: #fafafa;
+  background-color: var(--bg-tertiary);
 }
 
 .comparison-table .highlight {
